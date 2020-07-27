@@ -21,7 +21,7 @@
         </button>
       </td>
       <td>
-        <button class="btn btn-danger">
+        <button wire:click="destroy({{ $post->id }})" class="btn btn-danger">
           Eliminar
         </button>
       </td>
