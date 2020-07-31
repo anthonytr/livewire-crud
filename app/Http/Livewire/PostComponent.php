@@ -69,4 +69,3 @@ class PostComponent extends Component
         $this->view  = 'create';
     }
 }
-}
