@@ -26,12 +26,31 @@ class PostComponent extends Component
 
         Post::create([
             'title' => $this->title,
-            'body' => $this->body
+            'body'  => $this->body
         ]);
+    }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+
+        $this->title = $post->title;
+        $this->body  = $post->body;
+
+        $this->view  = 'edit';
     }
 
     public function destroy($id)
     {
         Post::destroy($id);
     }
+
+    public function default()
+    {
+        $this->title = '';
+        $this->body  = '';
+
+        $this->view  = 'create';
+    }
+}
 }
