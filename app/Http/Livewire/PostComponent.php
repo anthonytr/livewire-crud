@@ -10,7 +10,7 @@ class PostComponent extends Component
 {
     use WithPagination;
 
-    public $title, $body;
+    public $post_id, $title, $body;
     public $view = 'create';
 
     public function render()
@@ -24,20 +24,36 @@ class PostComponent extends Component
     {
         $this->validate(['title' => 'required', 'body' => 'required']);
 
-        Post::create([
+        $post = Post::create([
             'title' => $this->title,
             'body'  => $this->body
         ]);
+
+        $this->edit($post->id);
     }
 
     public function edit($id)
     {
         $post = Post::find($id);
 
-        $this->title = $post->title;
-        $this->body  = $post->body;
+        $this->post_id = $post->id;
+        $this->title   = $post->title;
+        $this->body    = $post->body;
 
-        $this->view  = 'edit';
+        $this->view    = 'edit';
+    }
+
+    public function update()
+    {
+        $this->validate(['title' => 'required', 'body' => 'required']);
+
+        $post = Post::find($this->post_id);
+
+        $post->update([
+            'title' => $this->title,
+            'body'  => $this->body
+        ]);
+
     }
 
     public function destroy($id)
